@@ -149,7 +149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1091262505491964493, guid: 96da46039b4accf4fbc5ec2a2c6a1cc9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 8.91
       objectReference: {fileID: 0}
     - target: {fileID: 1091262505491964493, guid: 96da46039b4accf4fbc5ec2a2c6a1cc9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -183,6 +183,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1091262505491964494, guid: 96da46039b4accf4fbc5ec2a2c6a1cc9, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1091262505491964495, guid: 96da46039b4accf4fbc5ec2a2c6a1cc9, type: 3}
     - {fileID: 1091262505491964492, guid: 96da46039b4accf4fbc5ec2a2c6a1cc9, type: 3}
@@ -212,18 +216,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orientation: {fileID: 886329099}
-  walkSpeed: 120
-  sprintSpeed: 17.5
+  walkSpeed: 60
+  sprintSpeed: 90
   sprintForce: 80
   sprintCooldown: 2
   multiplier: 1
-  slopeMultiplier: 2
+  slopeMultiplier: 1.35
   airMultiplier: 0.4
-  jumpForce: 5
+  jumpForce: 30
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   groundCheck: {fileID: 41141834}
   jumpKey: 32
 --- !u!114 &499780086
@@ -238,8 +242,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a9b5f715ad3604395f0aa9d5c237e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensX: 1
-  sensY: 1
+  sensX: 100
+  sensY: 100
   cam: {fileID: 663417417}
   orientation: {fileID: 886329099}
 --- !u!1 &663417415 stripped
@@ -433,7 +437,7 @@ GameObject:
   - component: {fileID: 976830103}
   - component: {fileID: 976830102}
   - component: {fileID: 976830101}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ff
   m_TagString: Untagged
   m_Icon: {fileID: 0}

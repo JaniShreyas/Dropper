@@ -151,6 +151,7 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded && !OnSlope())
         {
             rigidBody.AddForce(moveDirection.normalized * moveSpeed * multiplier, ForceMode.Acceleration);
+
         }
         else if(isGrounded && OnSlope())
         {
@@ -159,6 +160,7 @@ public class PlayerMovement : MonoBehaviour
         else if(!isGrounded)
         {
             rigidBody.AddForce(moveDirection.normalized * moveSpeed * airMultiplier * multiplier/Mathf.Abs(multiplier), ForceMode.Acceleration);
+            rigidBody.AddForce(Vector3.down * 10f, ForceMode.Acceleration);
         }
     }
 }
