@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
     float horizontal;
 
     float groundDrag = 6f;
-    float airDrag = 2f;
+    float airDrag = 0.001f;
 
     bool isGrounded;
 
@@ -144,6 +144,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
+        print(rigidBody.velocity);
     }
 
     private void MovePlayer()
