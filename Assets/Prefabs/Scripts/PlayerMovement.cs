@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 10f;
 
     [Header("Jumping")]
-    public float jumpForce = 5f;
+    public float jumpForce = 10f;
 
     public float groundDistance = 0.4f;
 
@@ -45,6 +45,9 @@ public class PlayerMovement : MonoBehaviour
     float airDrag = 0.001f;
 
     bool isGrounded;
+
+    // Used for detecting double jump
+    bool canDoubleJump = true;
 
     Vector3 moveDirection;
     Vector3 slopeMoveDirection;
@@ -87,7 +90,10 @@ public class PlayerMovement : MonoBehaviour
         SprintInput();
 
         slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
-
+        if (isGrounded)
+        {
+            canDoubleJump = true;
+        }
         sprintTimer += Time.deltaTime;
     }
 
@@ -104,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void PlayerInput()
-    {
+    {   
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
 
@@ -113,9 +119,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void JumpInput()
     {
-        if (Input.GetKeyDown(jumpKey) && isGrounded)
+        if (Input.GetKeyDown(jumpKey) && (isGrounded || canDoubleJump ))
         {
             Jump();
+
+            if (!isGrounded && canDoubleJump)
+            {
+                canDoubleJump = false;
+            }
         }
     }
 
@@ -144,7 +155,6 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
-        print(rigidBody.velocity);
     }
 
     private void MovePlayer()
