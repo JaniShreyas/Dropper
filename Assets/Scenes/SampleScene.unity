@@ -149,7 +149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1091262505491964493, guid: 96da46039b4accf4fbc5ec2a2c6a1cc9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 37.19
+      value: 49.21
       objectReference: {fileID: 0}
     - target: {fileID: 1091262505491964493, guid: 96da46039b4accf4fbc5ec2a2c6a1cc9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -290,6 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleTag: Obstacle
+  checkPointTag: CheckPoint
 --- !u!1 &663417415 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5806854503903276321, guid: 011664a2e47be1c4f9ea074b936aa730, type: 3}
