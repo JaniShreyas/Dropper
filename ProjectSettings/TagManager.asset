@@ -7,6 +7,8 @@ TagManager:
   - Obstacle
   - CheckPoint
   - Powerup/Invincibility
+  - Powerup/Ghost
+  - Powerup/SlowFalling
   layers:
   - Default
   - TransparentFX

@@ -9,17 +9,33 @@ public class EnvironmentInteraction : MonoBehaviour
     const string checkPointTag = "CheckPoint";
 
     const string powerupInvincibilityTag = "Powerup/Invincibility";
+    const string powerupGhostTag = "Powerup/Ghost";
+    private const string powerupSlowFalling = "Powerup/SlowFalling";
+
+    [SerializeField] int ghostDuration = 5;
+    [SerializeField] int slowFallingDuration = 10;
+    [SerializeField] float slowFallingAirMultiplier = 1.8f;
+    [SerializeField] private float slowFallingUpwardAcceleration = 1.8f;
 
     private Vector3 lastCheckPoint;
+    private float initialAirMultiplier;
 
-    public List<PowerUp> activePowerups;
+    public Dictionary<PowerUpType, PowerUp> activePowerups;
 
     List<Collider> invincibleColliders = new List<Collider>();
+    private CapsuleCollider capsuleCollider;
+    private Rigidbody rigidbody;
+    private PlayerMovement playerMovement;
+
 
     private void Awake()
     {
         lastCheckPoint = transform.position;
         activePowerups = (GetComponent<PowerupsManager>()).activePowerups;
+        capsuleCollider = GetComponent<CapsuleCollider>();
+        rigidbody = GetComponent<Rigidbody>();
+        playerMovement = GetComponent<PlayerMovement>();
+        initialAirMultiplier = playerMovement.airMultiplier;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,12 +43,15 @@ public class EnvironmentInteraction : MonoBehaviour
         switch (other.tag)
         {
             case obstacleTag:
+
+
+                if (activePowerups.ContainsKey(PowerUpType.Ghost)) return;
                 if (invincibleColliders.Contains(other)) return;
 
-                if (activePowerups.Contains(new Invincibility()))
+                if (activePowerups.ContainsKey(PowerUpType.Invincibility))
                 {
                     invincibleColliders.Add(other);
-                    activePowerups.Remove(new Invincibility());
+                    activePowerups.Remove(PowerUpType.Invincibility);
                     return;
                 }
 
@@ -42,18 +61,68 @@ public class EnvironmentInteraction : MonoBehaviour
                 lastCheckPoint = other.transform.GetChild(0).position;
                 break;
             case powerupInvincibilityTag:
-                print(activePowerups);
-                if (!activePowerups.Contains(new Invincibility()))
+
+                if (!activePowerups.ContainsKey(PowerUpType.Invincibility))
                 {
-                    activePowerups.Add(new Invincibility());
+                    activePowerups.Add(PowerUpType.Invincibility, new Invincibility());
                 }
+
+
                 break;
+            case powerupGhostTag:
+                if (!activePowerups.ContainsKey(PowerUpType.Ghost))
+                {
+                    activePowerups.Add(PowerUpType.Ghost, new Ghost());
+                    capsuleCollider.isTrigger = true;
+                    StartCoroutine(Wait(ghostDuration, DisableGhost));
+                }
+
+                break;
+            case powerupSlowFalling:
+                if (!activePowerups.ContainsKey(PowerUpType.Ghost))
+                {
+                    playerMovement.airMultiplier = slowFallingAirMultiplier;
+                    activePowerups.Add(PowerUpType.SlowFalling, new SlowFallingPowerUp(slowFallingUpwardAcceleration));
+                    StartCoroutine(Wait(slowFallingDuration, DisableSlowFalling));
+                }
+
+
+                break;
+        }
+
+        if (other.tag.Contains("Powerup"))
+        {
+            Destroy(other.gameObject);
         }
     }
 
     private void ResetToLastCheckpoint()
     {
-        transform.position = lastCheckPoint;
+        // Reset powerups
+        DisableGhost();
+        DisableSlowFalling();
         invincibleColliders.Clear();
+        activePowerups.Clear();
+
+        transform.position = lastCheckPoint;
+    }
+
+    private void DisableGhost()
+    {
+        capsuleCollider.isTrigger = false;
+        activePowerups.Remove(PowerUpType.Ghost);
+    }
+
+    private void DisableSlowFalling()
+    {
+        activePowerups.Remove(PowerUpType.SlowFalling);
+        playerMovement.airMultiplier = initialAirMultiplier;
+    }
+
+    private IEnumerator Wait(int seconds, Action predicate)
+    {
+        yield return new WaitForSeconds(seconds);
+
+        predicate();
     }
 }
