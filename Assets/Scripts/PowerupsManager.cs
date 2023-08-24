@@ -31,7 +31,6 @@ public class SlowFallingPowerUp : PowerUp
             Vector3.up * 10f, ForceMode.Acceleration 
             );
     }
-
 }
 
 public class Invincibility : PowerUp
@@ -43,7 +42,7 @@ public class Invincibility : PowerUp
 
 public class PowerupsManager : MonoBehaviour
 {
-    public List<PowerUp> activePowerups = new List<PowerUp>();
+    public Dictionary<PowerUpType, PowerUp> activePowerups = new Dictionary<PowerUpType, PowerUp>();
 
     // Start is called before the first frame update
     void Start()

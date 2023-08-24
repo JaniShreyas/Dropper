@@ -12,7 +12,7 @@ public class EnvironmentInteraction : MonoBehaviour
 
     private Vector3 lastCheckPoint;
 
-    public List<PowerUp> activePowerups;
+    public Dictionary<PowerUpType, PowerUp> activePowerups;
 
     List<Collider> invincibleColliders = new List<Collider>();
 
@@ -29,10 +29,10 @@ public class EnvironmentInteraction : MonoBehaviour
             case obstacleTag:
                 if (invincibleColliders.Contains(other)) return;
 
-                if (activePowerups.Contains(new Invincibility()))
+                if (activePowerups.ContainsKey(PowerUpType.Invincibility))
                 {
                     invincibleColliders.Add(other);
-                    activePowerups.Remove(new Invincibility());
+                    activePowerups.Remove(PowerUpType.Invincibility);
                     return;
                 }
 
@@ -42,10 +42,9 @@ public class EnvironmentInteraction : MonoBehaviour
                 lastCheckPoint = other.transform.GetChild(0).position;
                 break;
             case powerupInvincibilityTag:
-                print(activePowerups);
-                if (!activePowerups.Contains(new Invincibility()))
+                if (!activePowerups.ContainsKey(PowerUpType.Invincibility))
                 {
-                    activePowerups.Add(new Invincibility());
+                    activePowerups.Add(PowerUpType.Invincibility, new Invincibility());
                 }
                 break;
         }
