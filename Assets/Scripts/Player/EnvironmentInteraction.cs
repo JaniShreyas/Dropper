@@ -12,7 +12,7 @@ public class EnvironmentInteraction : MonoBehaviour
     const string powerupGhostTag = "Powerup/Ghost";
     private const string powerupSlowFalling = "Powerup/SlowFalling";
 
-    [SerializeField] int ghostDuration = 5;
+    [SerializeField] float ghostDuration = 5f;
     [SerializeField] int slowFallingDuration = 10;
     [SerializeField] float slowFallingAirMultiplier = 1.8f;
     [SerializeField] private float slowFallingUpwardAcceleration = 1.8f;
@@ -119,7 +119,7 @@ public class EnvironmentInteraction : MonoBehaviour
         playerMovement.airMultiplier = initialAirMultiplier;
     }
 
-    private IEnumerator Wait(int seconds, Action predicate)
+    private IEnumerator Wait(float seconds, Action predicate)
     {
         yield return new WaitForSeconds(seconds);
 

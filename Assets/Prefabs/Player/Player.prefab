@@ -41,6 +41,10 @@ GameObject:
   - component: {fileID: 1091262505491964493}
   - component: {fileID: 1091262505491964494}
   - component: {fileID: 674493305}
+  - component: {fileID: 499780085}
+  - component: {fileID: 499780086}
+  - component: {fileID: 499780088}
+  - component: {fileID: 499780091}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -96,6 +100,78 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &499780085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091262505491964488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1f291e75d9fdeb4bb1511881d3b3822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 1091262506326311009}
+  walkSpeed: 60
+  sprintSpeed: 90
+  sprintForce: 80
+  sprintCooldown: 2
+  multiplier: 1
+  slopeMultiplier: 1.35
+  airMultiplier: 0.4
+  jumpForce: 15
+  groundDistance: 0.4
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 8
+  groundCheck: {fileID: 1091262505318414310}
+  jumpKey: 32
+--- !u!114 &499780086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091262505491964488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a9b5f715ad3604395f0aa9d5c237e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensX: 100
+  sensY: 100
+  cam: {fileID: 0}
+  orientation: {fileID: 1091262506326311009}
+--- !u!114 &499780088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091262505491964488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07ee7491b69abde45a38428f7e472f02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ghostDuration: 1.5
+  slowFallingDuration: 10
+  slowFallingAirMultiplier: 1.25
+  slowFallingUpwardAcceleration: 1.8
+--- !u!114 &499780091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091262505491964488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cd4e6f83ffb84942b7f8403f461cee7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbody: {fileID: 0}
 --- !u!1 &1091262506326311010
 GameObject:
   m_ObjectHideFlags: 0
