@@ -9,6 +9,7 @@ TagManager:
   - Powerup/Invincibility
   - Powerup/Ghost
   - Powerup/SlowFalling
+  - Floor
   layers:
   - Default
   - TransparentFX
